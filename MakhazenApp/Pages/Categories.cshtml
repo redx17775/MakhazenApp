@@ -1,0 +1,19 @@
+﻿@page
+@model CategoriesModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h2>Categories</h2>
+
+<form method="post" class="mb-3 d-flex gap-2">
+    <input asp-for="NewCategory" class="form-control" placeholder="New category" />
+    <button class="btn btn-secondary">Add</button>
+</form>
+
+<ul class="list-group">
+    @foreach (var c in Model.Categories)
+    {
+        <li class="list-group-item d-flex justify-content-between">@c.Name <span class="badge bg-primary">@Model.GetCount(c.Name)</span></li>
+    }
+</ul>

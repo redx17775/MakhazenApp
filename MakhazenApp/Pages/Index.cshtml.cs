@@ -1,0 +1,13 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
+public class IndexModel : PageModel
+{
+    private readonly IInventoryService _inv;
+    public IndexModel(IInventoryService inv) { _inv = inv; }
+    public int ProductCount { get; set; }
+    public int CategoryCount { get; set; }
+    public void OnGet()
+    {
+        ProductCount = _inv.GetProducts().Count();
+        CategoryCount = _inv.GetCategories().Count();
+    }
+}

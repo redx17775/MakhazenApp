@@ -1,0 +1,341 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\categories.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\categories.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\categories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\categories.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\addproduct.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\addproduct.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\addproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\addproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\stock.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\stock.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\suppliers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\suppliers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\products.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\products.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\controllers\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\controllers\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\services\\iinventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\services\\iinventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AddProduct.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\AddProduct.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\AddProduct.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\AddProduct.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\AddProduct.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAUwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:55:50.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Stock.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Stock.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Stock.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Stock.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Stock.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:00:58.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Suppliers.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Suppliers.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Suppliers.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Suppliers.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Suppliers.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:00:22.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Index.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAkwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:48:36.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Categories.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Categories.cshtml.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Categories.cshtml.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Categories.cshtml.cs",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Categories.cshtml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAIwBgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:57:50.824Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Categories.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Categories.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Categories.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Categories.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Categories.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T07:59:50.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddProduct.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\AddProduct.cshtml.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\AddProduct.cshtml.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\AddProduct.cshtml.cs",
+              "RelativeToolTip": "MakhazenApp\\Pages\\AddProduct.cshtml.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAgwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:57:15.084Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Products.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Products.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Products.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Products.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Products.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T07:59:02.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Products.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Products.cshtml.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Products.cshtml.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Products.cshtml.cs",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Products.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:02:42.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:48:52.634Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:48:19.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductApiController.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductApiController.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Controllers\\ProductApiController.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductApiController.cs",
+              "RelativeToolTip": "MakhazenApp\\Controllers\\ProductApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T13:13:46.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IInventoryService.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\IInventoryService.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Services\\IInventoryService.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\IInventoryService.cs",
+              "RelativeToolTip": "MakhazenApp\\Services\\IInventoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T13:12:42.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\InventoryService.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Services\\InventoryService.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\InventoryService.cs",
+              "RelativeToolTip": "MakhazenApp\\Services\\InventoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T13:11:32.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Order.cs",
+              "RelativeToolTip": "MakhazenApp\\Models\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T13:10:31.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Product.cs",
+              "RelativeToolTip": "MakhazenApp\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:04:12.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Program.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Program.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Program.cs",
+              "RelativeToolTip": "MakhazenApp\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:40:16.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Models\\Category.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Models\\Category.cs",
+              "RelativeToolTip": "MakhazenApp\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:04:31.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "MakhazenApp\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T08:39:58.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "MakhazenApp\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "MakhazenApp\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-01T08:10:30.488Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
