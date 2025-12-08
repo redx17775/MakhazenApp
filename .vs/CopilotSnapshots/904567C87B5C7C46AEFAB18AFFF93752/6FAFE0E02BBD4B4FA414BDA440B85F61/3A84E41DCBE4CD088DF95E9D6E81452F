@@ -1,0 +1,84 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using Microsoft.Data.SqlClient;
+
+public class EditProductModel : PageModel
+{
+    private readonly IConfiguration _config;
+    public EditProductModel(IConfiguration config) { _config = config; }
+
+    [BindProperty]
+    public Product Product { get; set; } = new();
+
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
+    public string? ErrorMessage { get; set; }
+
+    public void OnGet(int id)
+    {
+        LoadCategories();
+        try
+        {
+            var p = _db.Product.Find(id);
+            if (p != null)
+            {
+                Product = p;
+            }
+            else
+            {
+                ErrorMessage = "Product not found";
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            LoadCategories();
+            return Page();
+        }
+
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("UPDATE Product SET ProductName=@name, ItemCode=@code, CategoryID=@catId, Quantity=@stock, Price=@price, ImageURL=@photo WHERE ProductID=@id", conn);
+            cmd.Parameters.AddWithValue("@id", Product.Id);
+            cmd.Parameters.AddWithValue("@name", Product.Name);
+            cmd.Parameters.AddWithValue("@code", Product.Code);
+            cmd.Parameters.AddWithValue("@catId", Product.CategoryId == 0 ? (object)DBNull.Value : Product.CategoryId);
+            cmd.Parameters.AddWithValue("@stock", Product.Stock);
+            cmd.Parameters.AddWithValue("@price", Product.Price);
+            cmd.Parameters.AddWithValue("@photo", (object)Product.PhotoUrl ?? DBNull.Value);
+            conn.Open();
+            var rows = cmd.ExecuteNonQuery();
+            if (rows == 0) ModelState.AddModelError(string.Empty, "No rows affected");
+            return RedirectToPage("/Products");
+        }
+        catch (SqlException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            LoadCategories();
+            return Page();
+        }
+    }
+
+    private void LoadCategories()
+    {
+        var cats = new List<Category>();
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT CategoryID, CategoryName FROM Category", conn);
+            conn.Open();
+            using var r = cmd.ExecuteReader();
+            while (r.Read()) cats.Add(new Category { Id = r.GetInt32(0), Name = r.GetString(1) });
+        }
+        catch { }
+        Categories = cats;
+    }
+}

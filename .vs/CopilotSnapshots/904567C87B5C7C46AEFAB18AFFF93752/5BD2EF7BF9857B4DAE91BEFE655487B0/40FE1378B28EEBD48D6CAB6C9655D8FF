@@ -1,0 +1,118 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MakhazenApp.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Register EF DbContext and authentication
+builder.Services.AddDbContext<MakhazenApp.Data.ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthentication("Cookies").AddCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+});
+
+// Ensure local development database exists by running the SQL creation script (development only)
+// This reads `sql/create_db.sql` (copied to output) and executes batches separated by GO against master
+if (builder.Environment.IsDevelopment())
+{
+    try
+    {
+        var defaultConn = builder.Configuration.GetConnectionString("DefaultConnection");
+        if (!string.IsNullOrWhiteSpace(defaultConn))
+        {
+            // Use master to create the database if missing
+            var masterCsb = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder(defaultConn)
+            {
+                InitialCatalog = "master",
+                Encrypt = false,
+                TrustServerCertificate = true
+            };
+
+            var sqlPath = Path.Combine(builder.Environment.ContentRootPath, "sql", "create_db.sql");
+            if (!File.Exists(sqlPath))
+            {
+                // fallback to output folder
+                sqlPath = Path.Combine(AppContext.BaseDirectory, "sql", "create_db.sql");
+            }
+
+            if (File.Exists(sqlPath))
+            {
+                var sql = File.ReadAllText(sqlPath);
+                var batches = System.Text.RegularExpressions.Regex.Split(sql, "^\\s*GO\\s*$", System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                using var conn = new Microsoft.Data.SqlClient.SqlConnection(masterCsb.ConnectionString);
+                conn.Open();
+                foreach (var batch in batches)
+                {
+                    if (string.IsNullOrWhiteSpace(batch)) continue;
+                    using var cmd = new Microsoft.Data.SqlClient.SqlCommand(batch, conn);
+                    cmd.CommandTimeout = 60;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Database initialization failed: " + ex.Message);
+        // don't rethrow - app can still run if DB is managed manually
+    }
+}
+
+builder.Services.AddRazorPages(options =>
+{
+    // Require authentication for all pages by default
+    options.Conventions.AuthorizeFolder("/");
+    // Allow anonymous access to auth pages
+    options.Conventions.AllowAnonymousToPage("/Account/Login");
+    options.Conventions.AllowAnonymousToPage("/Account/Register");
+    options.Conventions.AllowAnonymousToPage("/Account/Logout");
+});
+builder.Services.AddControllers();
+// Use IConfiguration to access the database connection string where needed in page models and controllers
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Error");
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.MapRazorPages();
+// Seed a default admin user (development convenience)
+using (var scope = app.Services.CreateScope())
+{
+    var sp = scope.ServiceProvider;
+    try
+    {
+        var db = sp.GetRequiredService<MakhazenApp.Data.ApplicationDbContext>();
+        // ensure database exists (safe in dev/test)
+        db.Database.EnsureCreated();
+
+        if (!db.Users.Any(u => u.Username == "admin"))
+        {
+            // local helper to compute SHA256 base64
+            string ComputeHash(string input)
+            {
+                using var sha = System.Security.Cryptography.SHA256.Create();
+                var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+                return System.Convert.ToBase64String(sha.ComputeHash(bytes));
+            }
+
+            var pwd = ComputeHash("P@ssw0rd");
+            db.Users.Add(new Makhazen.Models.User { FirstName = "Admin", LastName = "User", Username = "admin", PasswordHash = pwd });
+            db.SaveChanges();
+            Console.WriteLine("Seeded admin user: admin / P@ssw0rd");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Seeding admin user failed: " + ex.Message);
+    }
+}
+app.MapFallbackToFile("index.html"); // serves React SPA
+app.Run();

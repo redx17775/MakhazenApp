@@ -1,0 +1,26 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Makhazen.Models;
+public class Product
+{
+    public int Id { get; set; }
+
+    [Required(ErrorMessage = "Name is required")]                // 1) Required
+    [StringLength(100, MinimumLength = 3, ErrorMessage = "3-100 chars")] // 2) StringLength
+    public string Name { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Item code required")]
+    [RegularExpression(@"^[A-Z0-9\-]{3,20}$", ErrorMessage = "Item code must be 3-20 chars (A-Z0-9-).")] // 3) RegEx
+    public string Code { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Category is required")]
+    public string Category { get; set; } = string.Empty;
+
+    [Range(0, 100000, ErrorMessage = "Price must be between 0 and 100000")] // 4) Range
+    public decimal Price { get; set; }
+
+    [Range(0, int.MaxValue, ErrorMessage = "Stock cannot be negative")]
+    public int Stock { get; set; }
+
+    public string? PhotoUrl { get; set; }
+}

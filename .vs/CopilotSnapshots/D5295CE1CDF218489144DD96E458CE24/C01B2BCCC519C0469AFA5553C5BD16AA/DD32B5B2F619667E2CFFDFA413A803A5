@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
+
+public class AddProductModel : PageModel
+{
+    private readonly IConfiguration _config;
+    public AddProductModel(IConfiguration config) { _config = config; }
+
+    [BindProperty]
+    public Product Product { get; set; } = new();
+
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
+    public string? Message { get; set; }
+    public string? ErrorMessage { get; set; }
+
+    public void OnGet()
+    {
+        // SELECT categories
+        var cats = new List<Category>();
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT CategoryID, CategoryName FROM Category", conn);
+            conn.Open();
+            using var r = cmd.ExecuteReader();
+            while (r.Read()) cats.Add(new Category { Id = r.GetInt32(0), Name = r.GetString(1) });
+            Categories = cats;
+        }
+        catch (Exception ex) { ErrorMessage = "Failed to load categories: " + ex.Message; }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            OnGet();
+            return Page();
+        }
+
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand(@"INSERT INTO Product (ProductName, ItemCode, CategoryID, Quantity, Price, ImageURL)
+                                            VALUES (@name,@code,@catId,@stock,@price,@photo)", conn);
+            cmd.Parameters.AddWithValue("@name", Product.Name);
+            cmd.Parameters.AddWithValue("@code", Product.Code);
+            cmd.Parameters.AddWithValue("@catId", Product.CategoryId == 0 ? (object)DBNull.Value : Product.CategoryId);
+            cmd.Parameters.AddWithValue("@stock", Product.Stock);
+            cmd.Parameters.AddWithValue("@price", Product.Price);
+            cmd.Parameters.AddWithValue("@photo", (object)Product.PhotoUrl ?? DBNull.Value);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            return RedirectToPage("/Products");
+        }
+        catch (SqlException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            ErrorMessage = ex.Message;
+            OnGet();
+            return Page();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Unexpected server error: " + ex.Message;
+            OnGet();
+            return Page();
+        }
+    }
+}

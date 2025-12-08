@@ -27,15 +27,15 @@
         <span asp-validation-for="Product.Code" class="text-danger"></span>
     </div>
     <div class="col-md-4">
-        <label asp-for="Product.Category" class="form-label"></label>
-        <select asp-for="Product.Category" class="form-select">
+        <label asp-for="Product.CategoryId" class="form-label"></label>
+        <select asp-for="Product.CategoryId" class="form-select">
             <option value="">Select</option>
             @foreach (var c in Model.Categories)
             {
-                <option value="@c.Name">@c.Name</option>
+                <option value="@c.Id">@c.Name</option>
             }
         </select>
-        <span asp-validation-for="Product.Category" class="text-danger"></span>
+        <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
     </div>
     <div class="col-md-4">
         <label asp-for="Product.Price" class="form-label"></label>

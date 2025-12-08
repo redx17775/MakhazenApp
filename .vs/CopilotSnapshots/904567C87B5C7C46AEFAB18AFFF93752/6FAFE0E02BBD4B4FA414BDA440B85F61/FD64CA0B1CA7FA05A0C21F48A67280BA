@@ -1,0 +1,62 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using MakhazenApp.Data;
+using Microsoft.EntityFrameworkCore;
+
+public class ProductsModel : PageModel
+{
+    private readonly ApplicationDbContext _db;
+    public ProductsModel(ApplicationDbContext db) { _db = db; }
+
+    public IEnumerable<Product> Products { get; set; } = Enumerable.Empty<Product>();
+    public string? ErrorMessage { get; set; }
+
+    // Use EF Core with LINQ method syntax
+    public void OnGet()
+    {
+        try
+        {
+            // join product with category to get category name in a single query
+            var query = from p in _db.Product
+                        join c in _db.Category on p.CategoryId equals c.Id into pc
+                        from c in pc.DefaultIfEmpty()
+                        select new Product
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Code = p.Code,
+                            CategoryId = p.CategoryId,
+                            Category = c != null ? c.Name : string.Empty,
+                            Stock = p.Stock,
+                            Price = p.Price,
+                            PhotoUrl = p.PhotoUrl,
+                            Status = p.Status
+                        };
+            Products = query.ToList();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Failed to load products: " + ex.Message;
+        }
+    }
+
+    // Delete using EF Core (LINQ lambda)
+    public IActionResult OnPostDelete(int id)
+    {
+        try
+        {
+            var prod = _db.Product.FirstOrDefault(p => p.Id == id);
+            if (prod != null)
+            {
+                _db.Product.Remove(prod);
+                _db.SaveChanges();
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Failed to delete product: " + ex.Message;
+        }
+        return RedirectToPage();
+    }
+}

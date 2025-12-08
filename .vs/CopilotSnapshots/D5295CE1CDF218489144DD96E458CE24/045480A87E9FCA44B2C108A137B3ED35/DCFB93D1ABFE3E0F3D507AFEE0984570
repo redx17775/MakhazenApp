@@ -1,0 +1,33 @@
+﻿@page
+@model ProductsModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+<table class="table table-striped">
+    <thead><tr><th>Name</th><th>Code</th><th>Category</th><th>Stock</th><th>Price</th></tr></thead>
+    <tbody>
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td>@p.Code</td>
+                <td>@p.Category</td>
+                <td>@p.Stock</td>
+                <td>@p.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <!-- Optionally include a React bundle to add client-side sorting/search -->
+    <script src="~/js/products.bundle.js"></script>
+}

@@ -1,0 +1,14 @@
+﻿{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
+
+  ,
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=MakhazenDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }

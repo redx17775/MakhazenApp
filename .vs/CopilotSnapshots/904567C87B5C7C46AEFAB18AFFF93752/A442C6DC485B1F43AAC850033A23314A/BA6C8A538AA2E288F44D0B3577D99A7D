@@ -1,0 +1,54 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using MakhazenApp.Data;
+using Microsoft.EntityFrameworkCore;
+
+public class AddProductModel : PageModel
+{
+    private readonly ApplicationDbContext _db;
+    public AddProductModel(ApplicationDbContext db) { _db = db; }
+
+    [BindProperty]
+    public Product Product { get; set; } = new();
+
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
+    public string? Message { get; set; }
+    public string? ErrorMessage { get; set; }
+
+    public void OnGet()
+    {
+        try
+        {
+            Categories = _db.Category
+                .OrderBy(c => c.Name)
+                .Select(c => new Category { Id = c.Id, Name = c.Name })
+                .ToList();
+        }
+        catch (Exception ex) { ErrorMessage = "Failed to load categories: " + ex.Message; }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            OnGet();
+            return Page();
+        }
+
+        try
+        {
+            Product.Status = string.IsNullOrWhiteSpace(Product.Status) ? "InStock" : Product.Status;
+            _db.Product.Add(Product);
+            _db.SaveChanges();
+            return RedirectToPage("/Products");
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            ErrorMessage = ex.Message;
+            OnGet();
+            return Page();
+        }
+    }
+}

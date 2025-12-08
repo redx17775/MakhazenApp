@@ -1,0 +1,107 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MakhazenApp.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Register EF DbContext and authentication
+builder.Services.AddDbContext<MakhazenApp.Data.ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+});
+
+// Ensure local development database exists by running the SQL creation script (development only)
+// This reads `sql/create_db.sql` (copied to output) and executes batches separated by GO against master
+if (builder.Environment.IsDevelopment())
+{
+    try
+    {
+        var defaultConn = builder.Configuration.GetConnectionString("DefaultConnection");
+        if (!string.IsNullOrWhiteSpace(defaultConn))
+        {
+            // Use master to create the database if missing
+            var masterCsb = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder(defaultConn)
+            {
+                InitialCatalog = "master",
+                Encrypt = false,
+                TrustServerCertificate = true
+            };
+
+            var sqlPath = Path.Combine(builder.Environment.ContentRootPath, "sql", "create_db.sql");
+            if (!File.Exists(sqlPath))
+            {
+                // fallback to output folder
+                sqlPath = Path.Combine(AppContext.BaseDirectory, "sql", "create_db.sql");
+            }
+
+            if (File.Exists(sqlPath))
+            {
+                var sql = File.ReadAllText(sqlPath);
+                var batches = System.Text.RegularExpressions.Regex.Split(sql, "^\\s*GO\\s*$", System.Text.RegularExpressions.RegexOptions.Multiline | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                using var conn = new Microsoft.Data.SqlClient.SqlConnection(masterCsb.ConnectionString);
+                conn.Open();
+                foreach (var batch in batches)
+                {
+                    if (string.IsNullOrWhiteSpace(batch)) continue;
+                    using var cmd = new Microsoft.Data.SqlClient.SqlCommand(batch, conn);
+                    cmd.CommandTimeout = 60;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Database initialization failed: " + ex.Message);
+        // don't rethrow - app can still run if DB is managed manually
+    }
+}
+
+builder.Services.AddRazorPages(options =>
+{
+    // Allow anonymous access to auth pages (login/register/logout)
+    options.Conventions.AllowAnonymousToPage("/Account/Login");
+    options.Conventions.AllowAnonymousToPage("/Account/Register");
+    options.Conventions.AllowAnonymousToPage("/Account/Logout");
+});
+builder.Services.AddControllers();
+// register http context accessor and current user service
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<MakhazenApp.Services.ICurrentUserService, MakhazenApp.Services.CurrentUserService>();
+// Require authentication for all endpoints by default (fallback policy). Pages allowed above remain anonymous.
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
+// Also add a global MVC filter to require authorization for Razor Pages handlers by default
+builder.Services.AddMvc(options =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+});
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Error");
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.MapRazorPages();
+app.MapFallbackToFile("index.html"); // serves React SPA
+app.Run();

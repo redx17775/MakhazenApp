@@ -1,0 +1,55 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using MakhazenApp.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace MakhazenApp.Pages.Account;
+public class LoginModel : PageModel
+{
+    private readonly ApplicationDbContext _db;
+    public LoginModel(ApplicationDbContext db) { _db = db; }
+
+    [BindProperty]
+    public InputModel Input { get; set; } = new();
+    public string? ErrorMessage { get; set; }
+
+    public class InputModel { public string Username { get; set; } = string.Empty; public string Password { get; set; } = string.Empty; }
+
+    public void OnGet() { }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (string.IsNullOrWhiteSpace(Input.Username) || string.IsNullOrWhiteSpace(Input.Password))
+        {
+            ErrorMessage = "Username and password required";
+            return Page();
+        }
+
+        var hash = Hash(Input.Password);
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == Input.Username && u.Password == hash);
+        if (user == null)
+        {
+            ErrorMessage = "Invalid credentials";
+            return Page();
+        }
+
+        var claims = new List<System.Security.Claims.Claim> { new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, user.Username), new System.Security.Claims.Claim("FullName", user.FirstName + " " + user.LastName) };
+        var identity = new System.Security.Claims.ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+        return RedirectToPage("/Index");
+    }
+
+    private static string Hash(string input)
+    {
+        using var sha = SHA256.Create();
+        var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(input));
+        return Convert.ToBase64String(bytes);
+    }
+}

@@ -1,0 +1,90 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using Microsoft.Data.SqlClient;
+
+public class EditProductModel : PageModel
+{
+    private readonly IConfiguration _config;
+    public EditProductModel(IConfiguration config) { _config = config; }
+
+    [BindProperty]
+    public Product Product { get; set; } = new();
+
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
+    public string? ErrorMessage { get; set; }
+
+    public void OnGet(int id)
+    {
+        LoadCategories();
+        try
+        {
+            var p = _db.Product.Find(id);
+            if (p != null)
+            {
+                Product = p;
+            }
+            else
+            {
+                ErrorMessage = "Product not found";
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            LoadCategories();
+            return Page();
+        }
+
+        try
+        {
+            var existing = _db.Product.Find(Product.Id);
+            if (existing == null)
+            {
+                ModelState.AddModelError(string.Empty, "Product not found");
+                LoadCategories();
+                return Page();
+            }
+
+            existing.Name = Product.Name;
+            existing.Code = Product.Code;
+            existing.CategoryId = Product.CategoryId == 0 ? existing.CategoryId : Product.CategoryId;
+            existing.Stock = Product.Stock;
+            existing.Price = Product.Price;
+            existing.PhotoUrl = Product.PhotoUrl;
+            existing.Status = string.IsNullOrWhiteSpace(Product.Status) ? existing.Status : Product.Status;
+
+            _db.Product.Update(existing);
+            _db.SaveChanges();
+            return RedirectToPage("/Products");
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            LoadCategories();
+            return Page();
+        }
+    }
+
+    private void LoadCategories()
+    {
+        var cats = new List<Category>();
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT CategoryID, CategoryName FROM Category", conn);
+            conn.Open();
+            using var r = cmd.ExecuteReader();
+            while (r.Read()) cats.Add(new Category { Id = r.GetInt32(0), Name = r.GetString(1) });
+        }
+        catch { }
+        Categories = cats;
+    }
+}

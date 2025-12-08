@@ -1,0 +1,29 @@
+@page
+@model MakhazenApp.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage)) { <div class="alert alert-danger">@Model.ErrorMessage</div> }
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Input.FirstName"></label>
+        <input asp-for="Input.FirstName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.LastName"></label>
+        <input asp-for="Input.LastName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.Username"></label>
+        <input asp-for="Input.Username" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Input.Password"></label>
+        <input asp-for="Input.Password" type="password" class="form-control" />
+    </div>
+    <button class="btn btn-primary">Register</button>
+</form>

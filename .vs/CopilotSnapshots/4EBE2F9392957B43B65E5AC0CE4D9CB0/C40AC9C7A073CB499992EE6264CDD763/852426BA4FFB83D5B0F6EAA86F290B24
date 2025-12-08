@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-5 fw-bold mb-3">Welcome to Makhazen</h1>
+    <p class="lead">Your Warehouse Management System.</p>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="fs-4 fw-semibold">@Model.ProductCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="fs-4 fw-semibold">@Model.CategoryCount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

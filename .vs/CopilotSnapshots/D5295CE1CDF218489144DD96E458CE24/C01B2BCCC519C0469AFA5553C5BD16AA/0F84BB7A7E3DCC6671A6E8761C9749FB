@@ -1,0 +1,42 @@
+﻿-- create_db.sql
+-- Creates 'DB' database and basic schema used by the app. Run locally using SSMS or sqlcmd.
+
+IF DB_ID('DB') IS NULL
+BEGIN
+    CREATE DATABASE [DB];
+END
+GO
+
+USE [DB];
+GO
+
+IF OBJECT_ID('Categories') IS NULL
+BEGIN
+    CREATE TABLE Categories (
+        Id INT IDENTITY(1,1) PRIMARY KEY,
+        Name NVARCHAR(100) NOT NULL
+    );
+END
+GO
+
+IF OBJECT_ID('Products') IS NULL
+BEGIN
+    CREATE TABLE Products (
+        Id INT IDENTITY(1,1) PRIMARY KEY,
+        Name NVARCHAR(100) NOT NULL,
+        Code NVARCHAR(50) NOT NULL,
+        Category NVARCHAR(100) NOT NULL,
+        Stock INT NOT NULL DEFAULT 0,
+        Price DECIMAL(18,2) NOT NULL DEFAULT 0,
+        PhotoUrl NVARCHAR(MAX) NULL
+    );
+END
+GO
+
+-- Insert basic sample data
+IF NOT EXISTS (SELECT 1 FROM Categories)
+    INSERT INTO Categories (Name) VALUES ('Uncategorized');
+
+IF NOT EXISTS (SELECT 1 FROM Products)
+    INSERT INTO Products (Name, Code, Category, Stock, Price) VALUES ('Sample', 'SMP001', 'Uncategorized', 10, 9.99);
+GO

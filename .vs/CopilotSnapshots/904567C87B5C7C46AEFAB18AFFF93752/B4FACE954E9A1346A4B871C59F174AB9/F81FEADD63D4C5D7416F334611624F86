@@ -1,0 +1,74 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Makhazen.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
+
+public class CategoriesModel : PageModel
+{
+    private readonly IConfiguration _config;
+    public CategoriesModel(IConfiguration config) { _config = config; }
+
+    [BindProperty]
+    public string NewCategory { get; set; } = string.Empty;
+
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
+
+    public void OnGet()
+    {
+        var list = new List<Category>();
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT CategoryID, CategoryName FROM Category", conn);
+            conn.Open();
+            using var r = cmd.ExecuteReader();
+            while (r.Read()) list.Add(new Category { Id = r.GetInt32(0), Name = r.GetString(1) });
+            Categories = list;
+        }
+        catch (Exception) { Categories = Enumerable.Empty<Category>(); }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (string.IsNullOrWhiteSpace(NewCategory))
+        {
+            ModelState.AddModelError(string.Empty, "Category name required");
+            OnGet();
+            return Page();
+        }
+
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("INSERT INTO Category (CategoryName) VALUES (@name)", conn);
+            cmd.Parameters.AddWithValue("@name", NewCategory.Trim());
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            return RedirectToPage();
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+            OnGet();
+            return Page();
+        }
+    }
+
+    public int GetCount(string category)
+    {
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT COUNT(*) FROM Product WHERE CategoryID = (SELECT CategoryID FROM Category WHERE CategoryName = @cat)", conn);
+            cmd.Parameters.AddWithValue("@cat", category);
+            conn.Open();
+            var res = cmd.ExecuteScalar();
+            return res is int i ? i : Convert.ToInt32(res);
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+}

@@ -26,4 +26,23 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-2">
+            <h4>Products by Category</h4>
+            <table class="table table-sm">
+                <thead><tr><th>Category</th><th>Count</th><th>Avg Price</th></tr></thead>
+                <tbody>
+                    @foreach (var g in Model.ProductGroupByCategory)
+                    {
+                        <tr>
+                            <td>@g.GetType().GetProperty("Category")?.GetValue(g)</td>
+                            <td>@g.GetType().GetProperty("Count")?.GetValue(g)</td>
+                            <td>@String.Format("{0:C}", g.GetType().GetProperty("AvgPrice")?.GetValue(g))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

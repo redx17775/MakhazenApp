@@ -1,40 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Makhazen.Models;
+using MakhazenApp.Data;
+using Microsoft.EntityFrameworkCore;
 
 public class AddProductModel : PageModel
 {
-    private readonly IInventoryService _inv;
-    public AddProductModel(IInventoryService inv) { _inv = inv; }
+    private readonly ApplicationDbContext _db;
+    public AddProductModel(ApplicationDbContext db) { _db = db; }
 
     [BindProperty]
     public Product Product { get; set; } = new();
 
-    public IEnumerable<Category> Categories => _inv.GetCategories();
+    public IEnumerable<Category> Categories { get; set; } = Enumerable.Empty<Category>();
     public string? Message { get; set; }
     public string? ErrorMessage { get; set; }
 
-    public void OnGet() { }
-
-    public IActionResult OnPost()
+    public void OnGet()
     {
         try
         {
-            if (!ModelState.IsValid) return Page();
-
-            _inv.AddProduct(Product);
-            Message = "Product added successfully";
-            return RedirectToPage("/Products");
+            Categories = _db.Category.AsNoTracking().OrderBy(c => c.Name).ToList();
         }
-        catch (ArgumentException ex)
+        catch (Exception ex) { ErrorMessage = "Failed to load categories: " + ex.Message; }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
         {
-            ModelState.AddModelError(string.Empty, ex.Message);
-            ErrorMessage = ex.Message;
+            OnGet();
             return Page();
+        }
+
+        try
+        {
+            Product.Status = string.IsNullOrWhiteSpace(Product.Status) ? "InStock" : Product.Status;
+            _db.Product.Add(Product);
+            _db.SaveChanges();
+            return RedirectToPage("/Products");
         }
         catch (Exception ex)
         {
-            ErrorMessage = "Unexpected server error: " + ex.Message;
+            ModelState.AddModelError(string.Empty, ex.Message);
+            ErrorMessage = ex.Message;
+            OnGet();
             return Page();
         }
     }

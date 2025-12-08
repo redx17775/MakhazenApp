@@ -1,0 +1,17 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Makhazen.Models;
+
+namespace MakhazenApp.Data;
+
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<Product> Product { get; set; } = null!;
+    public DbSet<Category> Category { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Store> Stores { get; set; } = null!;
+    public DbSet<Transaction> Transactions { get; set; } = null!;
+}

@@ -1,0 +1,30 @@
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+
+public class IndexModel : PageModel
+{
+    private readonly IConfiguration _config;
+    public IndexModel(IConfiguration config) { _config = config; }
+    public int ProductCount { get; set; }
+    public int CategoryCount { get; set; }
+    public void OnGet()
+    {
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT COUNT(*) FROM Products", conn);
+            conn.Open();
+            ProductCount = (int)cmd.ExecuteScalar();
+        }
+        catch { ProductCount = 0; }
+
+        try
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("SELECT COUNT(*) FROM Categories", conn);
+            conn.Open();
+            CategoryCount = (int)cmd.ExecuteScalar();
+        }
+        catch { CategoryCount = 0; }
+    }
+}

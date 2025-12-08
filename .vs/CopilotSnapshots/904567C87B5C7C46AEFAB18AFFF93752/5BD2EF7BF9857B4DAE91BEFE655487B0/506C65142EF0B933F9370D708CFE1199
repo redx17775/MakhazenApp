@@ -1,0 +1,31 @@
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using MakhazenApp.Data;
+using Microsoft.EntityFrameworkCore;
+
+public class IndexModel : PageModel
+{
+    private readonly ApplicationDbContext _db;
+    public IndexModel(ApplicationDbContext db) { _db = db; }
+    public int ProductCount { get; set; }
+    public int CategoryCount { get; set; }
+
+    public void OnGet()
+    {
+        try
+        {
+            // LINQ simple count
+            ProductCount = _db.Product.Count();
+        }
+        catch { ProductCount = 0; }
+
+        try
+        {
+            // LINQ grouping example: count products per category then count categories
+            var groups = from p in _db.Product
+                         group p by p.CategoryId into g
+                         select new { CategoryId = g.Key, Count = g.Count() };
+            CategoryCount = groups.Count();
+        }
+        catch { CategoryCount = 0; }
+    }
+}
