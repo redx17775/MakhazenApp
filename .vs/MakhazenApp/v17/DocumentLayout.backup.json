@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\controllers\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\controllers\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|c:\\users\\redx1\\source\\repos\\makhazenapp\\makhazenapp\\services\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8E6549B6-A579-4190-BEA4-BE1E2F5FE6BA}|MakhazenApp\\MakhazenApp.csproj|solutionrelative:makhazenapp\\services\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "ProductApiController.cs",
+              "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductApiController.cs",
+              "RelativeDocumentMoniker": "MakhazenApp\\Controllers\\ProductApiController.cs",
+              "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Controllers\\ProductApiController.cs",
+              "RelativeToolTip": "MakhazenApp\\Controllers\\ProductApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T18:30:53.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CurrentUserService.cs",
               "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\CurrentUserService.cs",
               "RelativeDocumentMoniker": "MakhazenApp\\Services\\CurrentUserService.cs",
@@ -34,16 +51,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ICurrentUserService.cs",
               "DocumentMoniker": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\ICurrentUserService.cs",
               "RelativeDocumentMoniker": "MakhazenApp\\Services\\ICurrentUserService.cs",
               "ToolTip": "C:\\Users\\redx1\\source\\repos\\MakhazenApp\\MakhazenApp\\Services\\ICurrentUserService.cs",
               "RelativeToolTip": "MakhazenApp\\Services\\ICurrentUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:43:44.498Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T19:43:44.498Z"
             }
           ]
         }

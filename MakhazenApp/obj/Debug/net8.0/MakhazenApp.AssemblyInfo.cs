@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MakhazenApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31851019f646c1b4ea439471ab692da78aaaf1a6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ccd68343dbcfbc25cdae12a7daf25093461b4dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("MakhazenApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MakhazenApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
