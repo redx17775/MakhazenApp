@@ -77,10 +77,26 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToPage("/Account/Register");
     options.Conventions.AllowAnonymousToPage("/Account/Logout");
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Use camelCase for JSON property names to match JavaScript conventions
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 // register http context accessor and current user service
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<MakhazenApp.Services.ICurrentUserService, MakhazenApp.Services.CurrentUserService>();
+
+// Add CORS to allow remote web applications to access the API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowRemoteAccess", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 // Require authentication for all endpoints by default (fallback policy). Pages allowed above remain anonymous.
 builder.Services.AddAuthorization(options =>
 {
@@ -101,6 +117,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Error");
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("AllowRemoteAccess"); // Enable CORS before authentication
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

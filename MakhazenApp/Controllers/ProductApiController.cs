@@ -1,137 +1,227 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Makhazen.Models;
-using Microsoft.Data.SqlClient;
-using System.Data;
-//backend=----
+using MakhazenApp.Data;
+
 [ApiController]
 [Route("api/[controller]")]
+[AllowAnonymous] // Allow remote access without authentication
 public class ProductApiController : ControllerBase
 {
-    private readonly IConfiguration _config;
-    public ProductApiController(IConfiguration config) { _config = config; }
+    private readonly ApplicationDbContext _context;
 
-    private string GetConn() => _config.GetConnectionString("DefaultConnection");
+    public ProductApiController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
+    // GET: api/ProductApi
     [HttpGet]
     public IActionResult GetAll()
     {
-        var list = new List<Product>();
         try
         {
-            using var conn = new SqlConnection(GetConn());
-            using var cmd = new SqlCommand("SELECT ProductID, ProductName, ItemCode, Price, Quantity, ImageURL, (SELECT CategoryName FROM Category WHERE CategoryID = p.CategoryID) AS CategoryName FROM Product p", conn);
-            conn.Open();
-            using var r = cmd.ExecuteReader();
-            while (r.Read())
-            {
-                list.Add(new Product
-                {
-                    Id = r.GetInt32(0),
-                    Name = r.GetString(1),
-                    Code = r.GetString(2),
-                    Price = r.GetDecimal(3),
-                    Stock = r.GetInt32(4),
-                    PhotoUrl = r.IsDBNull(5) ? null : r.GetString(5),
-                    Category = r.IsDBNull(6) ? string.Empty : r.GetString(6)
-                });
-            }
-            return Ok(list);
+            var products = (from p in _context.Product
+                          join c in _context.Category on p.CategoryId equals c.Id into categoryGroup
+                          from cat in categoryGroup.DefaultIfEmpty()
+                          select new Product
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Code = p.Code,
+                              Price = p.Price,
+                              Stock = p.Stock,
+                              PhotoUrl = p.PhotoUrl,
+                              CategoryId = p.CategoryId,
+                              Status = p.Status,
+                              Category = cat != null ? cat.Name : string.Empty
+                          }).ToList();
+
+            return Ok(products);
         }
-        catch (Exception ex) { return StatusCode(500, new { error = ex.Message }); }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
-    [HttpGet("{code}")]
+    // GET: api/ProductApi/{id}
+    [HttpGet("{id:int}")]
+    public IActionResult GetById(int id)
+    {
+        try
+        {
+            var product = (from p in _context.Product
+                          where p.Id == id
+                          join c in _context.Category on p.CategoryId equals c.Id into categoryGroup
+                          from cat in categoryGroup.DefaultIfEmpty()
+                          select new Product
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Code = p.Code,
+                              Price = p.Price,
+                              Stock = p.Stock,
+                              PhotoUrl = p.PhotoUrl,
+                              CategoryId = p.CategoryId,
+                              Status = p.Status,
+                              Category = cat != null ? cat.Name : string.Empty
+                          }).FirstOrDefault();
+
+            if (product == null) return NotFound();
+            return Ok(product);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
+    // GET: api/ProductApi/code/{code}
+    [HttpGet("code/{code}")]
     public IActionResult GetByCode(string code)
     {
         try
         {
-            using var conn = new SqlConnection(GetConn());
-            using var cmd = new SqlCommand("SELECT ProductID, ProductName, ItemCode, Price, Quantity, ImageURL, (SELECT CategoryName FROM Category WHERE CategoryID = p.CategoryID) AS CategoryName FROM Product p WHERE ItemCode = @code", conn);
-            cmd.Parameters.AddWithValue("@code", code);
-            conn.Open();
-            using var r = cmd.ExecuteReader();
-            if (!r.Read()) return NotFound();
-            var p = new Product
-            {
-                Id = r.GetInt32(0),
-                Name = r.GetString(1),
-                Code = r.GetString(2),
-                Price = r.GetDecimal(3),
-                Stock = r.GetInt32(4),
-                PhotoUrl = r.IsDBNull(5) ? null : r.GetString(5),
-                Category = r.IsDBNull(6) ? string.Empty : r.GetString(6)
-            };
-            return Ok(p);
+            var product = (from p in _context.Product
+                          where p.Code == code
+                          join c in _context.Category on p.CategoryId equals c.Id into categoryGroup
+                          from cat in categoryGroup.DefaultIfEmpty()
+                          select new Product
+                          {
+                              Id = p.Id,
+                              Name = p.Name,
+                              Code = p.Code,
+                              Price = p.Price,
+                              Stock = p.Stock,
+                              PhotoUrl = p.PhotoUrl,
+                              CategoryId = p.CategoryId,
+                              Status = p.Status,
+                              Category = cat != null ? cat.Name : string.Empty
+                          }).FirstOrDefault();
+
+            if (product == null) return NotFound();
+            return Ok(product);
         }
-        catch (Exception ex) { return StatusCode(500, new { error = ex.Message }); }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
+    // GET: api/ProductApi/search?name={name}&category={category}
+    [HttpGet("search")]
+    public IActionResult Search([FromQuery] string? name = null, [FromQuery] string? category = null)
+    {
+        try
+        {
+            var query = from p in _context.Product
+                       join c in _context.Category on p.CategoryId equals c.Id into categoryGroup
+                       from cat in categoryGroup.DefaultIfEmpty()
+                       where (string.IsNullOrEmpty(name) || p.Name.Contains(name))
+                          && (string.IsNullOrEmpty(category) || (cat != null && cat.Name.Contains(category)))
+                       select new Product
+                       {
+                           Id = p.Id,
+                           Name = p.Name,
+                           Code = p.Code,
+                           Price = p.Price,
+                           Stock = p.Stock,
+                           PhotoUrl = p.PhotoUrl,
+                           CategoryId = p.CategoryId,
+                           Status = p.Status,
+                           Category = cat != null ? cat.Name : string.Empty
+                       };
+
+            var products = query.ToList();
+            return Ok(products);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
+    }
+
+    // POST: api/ProductApi
     [HttpPost]
     public IActionResult Create([FromBody] Product product)
     {
-        if (product is null) return BadRequest("Product required");
-        if (string.IsNullOrWhiteSpace(product.Name) || string.IsNullOrWhiteSpace(product.Code))
-            return BadRequest("Name and Code required");
+        if (product == null) return BadRequest("Product required");
+
         try
         {
-            using var conn = new SqlConnection(GetConn());
-            using var cmd = new SqlCommand(@"INSERT INTO Product (ProductName, ItemCode, CategoryID, Quantity, Price, ImageURL, Status)
-                                            VALUES (@name,@code,@catId,@stock,@price,@photo,@status);
-                                            SELECT CAST(SCOPE_IDENTITY() as int);", conn);
-            cmd.Parameters.AddWithValue("@name", product.Name);
-            cmd.Parameters.AddWithValue("@code", product.Code);
-            cmd.Parameters.AddWithValue("@catId", product.CategoryId == 0 ? (object)DBNull.Value : product.CategoryId);
-            cmd.Parameters.AddWithValue("@stock", product.Stock);
-            cmd.Parameters.AddWithValue("@price", product.Price);
-            cmd.Parameters.AddWithValue("@photo", (object)product.PhotoUrl ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@status", string.IsNullOrWhiteSpace(product.Status) ? "InStock" : product.Status);
-            conn.Open();
-            var id = (int)cmd.ExecuteScalar();
-            product.Id = id;
-            return CreatedAtAction(nameof(GetByCode), new { code = product.Code }, product);
+            // Set default status if not provided
+            if (string.IsNullOrWhiteSpace(product.Status))
+            {
+                product.Status = "InStock";
+            }
+
+            _context.Product.Add(product);
+            _context.SaveChanges();
+
+            // Load category name for response
+            if (product.CategoryId > 0)
+            {
+                var category = _context.Category.Find(product.CategoryId);
+                if (category != null)
+                {
+                    product.Category = category.Name;
+                }
+            }
+
+            return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
-        catch (SqlException ex) { return BadRequest(new { error = ex.Message }); }
-        catch (Exception ex) { return StatusCode(500, new { error = ex.Message }); }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
+    // PUT: api/ProductApi/{id}
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] Product product)
+    public IActionResult Update(int id, [FromBody] Product updatedProduct)
     {
-        if (product is null) return BadRequest("Product required");
+        if (updatedProduct == null) return BadRequest("Product required");
+
         try
         {
-            using var conn = new SqlConnection(GetConn());
-            using var cmd = new SqlCommand(@"UPDATE Product SET ProductName=@name, ItemCode=@code, CategoryID=@catId, Quantity=@stock, Price=@price, ImageURL=@photo, Status=@status WHERE ProductID=@id", conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@name", product.Name);
-            cmd.Parameters.AddWithValue("@code", product.Code);
-            cmd.Parameters.AddWithValue("@catId", product.CategoryId == 0 ? (object)DBNull.Value : product.CategoryId);
-            cmd.Parameters.AddWithValue("@stock", product.Stock);
-            cmd.Parameters.AddWithValue("@price", product.Price);
-            cmd.Parameters.AddWithValue("@photo", (object)product.PhotoUrl ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@status", string.IsNullOrWhiteSpace(product.Status) ? "InStock" : product.Status);
-            conn.Open();
-            var rows = cmd.ExecuteNonQuery();
-            if (rows == 0) return NotFound();
+            var product = _context.Product.Find(id);
+            if (product == null) return NotFound();
+
+            product.Name = updatedProduct.Name;
+            product.Code = updatedProduct.Code;
+            product.CategoryId = updatedProduct.CategoryId;
+            product.Stock = updatedProduct.Stock;
+            product.Price = updatedProduct.Price;
+            product.PhotoUrl = updatedProduct.PhotoUrl;
+            product.Status = updatedProduct.Status;
+
+            _context.SaveChanges();
             return NoContent();
         }
-        catch (SqlException ex) { return BadRequest(new { error = ex.Message }); }
-        catch (Exception ex) { return StatusCode(500, new { error = ex.Message }); }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
+    // DELETE: api/ProductApi/{id}
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
         try
         {
-            using var conn = new SqlConnection(GetConn());
-            using var cmd = new SqlCommand("DELETE FROM Product WHERE ProductID=@id", conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            conn.Open();
-            var rows = cmd.ExecuteNonQuery();
-            if (rows == 0) return NotFound();
+            var product = _context.Product.Find(id);
+            if (product == null) return NotFound();
+
+            _context.Product.Remove(product);
+            _context.SaveChanges();
             return NoContent();
         }
-        catch (Exception ex) { return StatusCode(500, new { error = ex.Message }); }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 }

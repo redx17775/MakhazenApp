@@ -1,5 +1,116 @@
 [
   {
+    "ContainingType": "CategoriesApiController",
+    "Method": "GetAll",
+    "RelativePath": "api/CategoriesApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "Create",
+    "RelativePath": "api/CategoriesApi",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "Makhazen.Models.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "GetById",
+    "RelativePath": "api/CategoriesApi/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "Update",
+    "RelativePath": "api/CategoriesApi/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedCategory",
+        "Type": "Makhazen.Models.Category",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "Delete",
+    "RelativePath": "api/CategoriesApi/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "GetProductsByCategory",
+    "RelativePath": "api/CategoriesApi/{id}/products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CategoriesApiController",
+    "Method": "Search",
+    "RelativePath": "api/CategoriesApi/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ProductApiController",
     "Method": "GetAll",
     "RelativePath": "api/ProductApi",
@@ -27,15 +138,15 @@
   },
   {
     "ContainingType": "ProductApiController",
-    "Method": "GetByCode",
-    "RelativePath": "api/ProductApi/{code}",
+    "Method": "GetById",
+    "RelativePath": "api/ProductApi/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "code",
-        "Type": "System.String",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -55,7 +166,7 @@
         "IsRequired": true
       },
       {
-        "Name": "product",
+        "Name": "updatedProduct",
         "Type": "Makhazen.Models.Product",
         "IsRequired": true
       }
@@ -74,6 +185,43 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProductApiController",
+    "Method": "GetByCode",
+    "RelativePath": "api/ProductApi/code/{code}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProductApiController",
+    "Method": "Search",
+    "RelativePath": "api/ProductApi/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
